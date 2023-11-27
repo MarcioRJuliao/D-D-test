@@ -3,17 +3,47 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="dandd.Views.RaceView"
              Title="RacesView">
-    <Frame BorderColor="Gray"
-       CornerRadius="5"
-       Padding="8">
-        <StackLayout>
-            <Label Text="Card Example"
-           FontSize="16"
-           FontAttributes="Bold" />
-            <BoxView Color="Gray"
-             HeightRequest="2"
-             HorizontalOptions="Fill" />
-            <Label Text="Frames can wrap more complex layouts to create more complex UI components, such as this card!"/>
-        </StackLayout>
-    </Frame>
+    <ScrollView>
+        <VerticalStackLayout>
+            <Entry Placeholder="Index" Text="{Binding Race.index}"/>
+            <Entry Placeholder="Nome" Text="{Binding Race.nome}"/>
+            <Entry Placeholder="url" Text="{Binding Race.url}"/>
+
+            <HorizontalStackLayout>
+                <Button Text="Carregar Racas" Command="{Binding LoadRacasAsync()}"/>
+            </HorizontalStackLayout>
+
+            <CollectionView x:Name="RacasCollection" ItemsSource="{Binding Racas}" EmptyView="Nenhuma raca encontrada">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"/>
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <VerticalStackLayout>
+                            <Frame>
+                                <VerticalStackLayout Margin="50" HorizontalOptions="Center" MaximumWidthRequest="180">
+                                    <Label 
+                                        Text="{Binding Raca.index}"
+                                        VerticalOptions="Center" 
+                                        HorizontalOptions="Center" />
+
+                                    <Label 
+                                        Text="{Binding  Raca.nome}"
+                                        VerticalOptions="Center" 
+                                        HorizontalOptions="Center" />
+
+                                    <Label 
+                                        Text="{Binding  Raca.url}"
+                                        VerticalOptions="Center" 
+                                        HorizontalOptions="Center" />
+
+                                </VerticalStackLayout>
+                            </Frame>
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
